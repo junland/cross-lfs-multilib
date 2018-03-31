@@ -1,0 +1,42 @@
+# description	: Vi Improved, a highly configurable, improved version of the vi text editor
+# depends	: acl
+# makedepends	: gawk
+
+name=vim
+version=8.0.586
+release=1
+source=(ftp://ftp.vim.org/pub/vim/unix/$name-$version.tar.bz2)
+
+build() {
+	cd vim80
+
+	echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+
+	ln -sv vim $PKG/usr/bin/vi
+	
+	# no desktop files and icons
+	rm -r $PKG/usr/share/{applications,icons}
+
+	mkdir -pv $PKG/etc
+cat > $PKG/etc/vimrc << "EOF"
+" Begin /etc/vimrc
+
+" Ensure defaults are set before customizing settings, not after
+source $VIMRUNTIME/defaults.vim
+let skip_defaults_vim=1 
+
+set nocompatible
+set backspace=2
+set mouse=
+syntax on
+if (&term == "xterm") || (&term == "putty")
+  set background=dark
+endif
+
+" End /etc/vimrc
+EOF
+}

@@ -1,0 +1,19 @@
+# description	: An implementation of the DHCP client specified in RFC2131
+# homepage	: http://roy.marples.name/projects/dhcpcd/
+# maintainer	: emmett1, emmett1.2miligrams at gmail.com
+
+name=dhcpcd
+version=7.0.1
+release=2
+source=(http://roy.marples.name/downloads/$name/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+
+  	./configure --libexecdir=/lib/dhcpcd \
+	            --dbdir=/var/lib/dhcpcd \
+		    --libdir=/usr/lib64
+	make
+	make DESTDIR=$PKG install
+}
+

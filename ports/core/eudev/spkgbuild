@@ -1,0 +1,48 @@
+# description	: Programs for dynamic creation of device nodes
+
+name=eudev
+version=3.2.5
+release=1
+source=(http://dev.gentoo.org/~blueness/$name/$name-$version.tar.gz
+	hwdb-update.hook)
+
+build() {
+	cd $name-$version
+
+if [ -d /tools ];then
+cat > config.cache << "EOF"
+HAVE_BLKID=1
+BLKID_LIBS="-lblkid"
+BLKID_CFLAGS="-I/tools/include"
+EOF
+fi
+
+	./configure --prefix=/usr           \
+	            --bindir=/sbin          \
+	            --sbindir=/sbin         \
+	            --libdir=/usr/lib64       \
+	            --sysconfdir=/etc       \
+		    --with-rootlibexecdir=/lib/udev \
+	            --libexecdir=/lib       \
+	            --with-rootprefix=      \
+	            --with-rootlibdir=/lib64  \
+	            --enable-manpages       \
+	            --disable-static	    \
+		    $([ -d /tools ] && echo "--config-cache")
+	if [ -d /tools ];then
+		LIBRARY_PATH=/tools/lib64 make
+	else
+		make
+	fi
+
+	#mkdir -pv $PKG/lib/udev/rules.d
+	mkdir -pv $PKG/etc/udev/rules.d
+
+	if [ -d /tools ];then
+		make LD_LIBRARY_PATH=/tools/lib64 DESTDIR=$PKG install
+	else
+		make DESTDIR=$PKG install
+	fi
+
+	install -Dm644 $SRC/hwdb-update.hook $PKG/etc/hooks/hwdb-update.hook
+}

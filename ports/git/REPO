@@ -1,0 +1,10 @@
+d:compton
+d:numix-themes-blue
+d:numix-icon-theme
+f:e8116c04c4f2e83b18c4dca3dd49f704:compton/spkgbuild
+f:3ba1d38df211634aa125362b438ad6f3:compton/compton.conf
+f:d97aa0890e482c69900afa04efa2bf63:compton/.md5sum
+f:8e54d370c7143d0f88264168147e32d7:numix-themes-blue/spkgbuild
+f:d41d8cd98f00b204e9800998ecf8427e:numix-themes-blue/.md5sum
+f:5f07aa91de8b0e0588e6a6fccead66da:numix-icon-theme/spkgbuild
+f:d41d8cd98f00b204e9800998ecf8427e:numix-icon-theme/.md5sum

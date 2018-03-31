@@ -1,0 +1,37 @@
+# description	: utilities for handling the ext2, ext3 and ext4 file system
+# depends	: bash
+# makedepends	: bc
+
+name=e2fsprogs
+version=1.44.0
+release=1
+source=(http://downloads.sourceforge.net/project/$name/$name/v$version/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	# Change the library directory to lib64
+	sed -i '/libdir.*=.*\/lib/s@/lib@/lib64@g' configure
+
+	mkdir -v build
+	cd build
+
+if [ -d /tools ]; then
+	LIBS=-L/tools/lib64                    \
+	CFLAGS=-I/tools/include              \
+	PKG_CONFIG_PATH=/tools/lib64/pkgconfig
+	export LIBS CFLAGS PKG_CONFIG_PATH
+fi
+	../configure \
+	    --prefix=/usr \
+	    --bindir=/bin \
+	    --with-root-prefix="" \
+	    --enable-elf-shlibs \
+	    --disable-libblkid \
+	    --disable-libuuid \
+	    --disable-fsck \
+	    --disable-uuidd
+	make
+	make DESTDIR=$PKG install
+	make DESTDIR=$PKG install-libs
+}

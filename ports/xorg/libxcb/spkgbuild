@@ -1,0 +1,30 @@
+# description	: X11 client-side library
+# homepage	: http://xcb.freedesktop.org/
+# maintainer	: emmett1, emmett1.2miligrams at gmail.com
+# depends	: libxau libxdmcp xcb-proto
+# makedepends	: python3 util-macros
+
+name=libxcb
+version=1.13
+release=1
+source=(http://xcb.freedesktop.org/dist/libxcb-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	
+	# removes dependency on libpthread-stubs package which is useless on Linux
+	sed -i "s/pthread-stubs//" configure
+
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--localstatedir=/var \
+		--disable-static     \
+		--libdir=/usr/lib64 \
+		--without-doxygen \
+		--docdir='${datadir}'/doc/libxcb
+	make
+	make DESTDIR=$PKG install
+
+}
+

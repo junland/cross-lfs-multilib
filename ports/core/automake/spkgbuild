@@ -1,0 +1,16 @@
+# description	: Programs for generating Makefiles for use with Autoconf
+# depends	: bash perl
+# makedepends	: autoconf
+
+name=automake
+version=1.16.1
+release=1
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+
+	./configure --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+}

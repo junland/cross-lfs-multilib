@@ -1,0 +1,21 @@
+# description	: Programs for compressing and decompressing files
+# depends	: glibc bash
+
+name=gzip
+version=1.9
+release=1
+source=(http://ftp.gnu.org/gnu/$name/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+
+	./configure \
+	    --prefix=/usr
+	make
+	make DESTDIR=$PKG install
+
+	mkdir -p $PKG/bin
+	mv -v $PKG/usr/bin/gzip $PKG/bin
+	#mv -v $PKG/bin/{gzexe,uncompress} $PKG/usr/bin
+	#mv -v $PKG/bin/z{egrep,cmp,diff,fgrep,force,grep,less,more,new} $PKG/usr/bin
+}
