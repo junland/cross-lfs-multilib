@@ -1,0 +1,48 @@
+#!/bin/bash
+
+if [ "$UID" != "0" ]; then
+	echo "Chroot need root access!"
+	exit 1
+fi
+
+LFS=$1
+
+if [ -z $1 ]; then
+	echo "Please set directory to chroot!"
+	exit 1
+fi
+
+if [ ! -d $LFS ]; then
+	echo "Directory '$LFS' not exist"
+	exit 1
+fi
+
+pushd $LFS
+
+mount -v --bind /dev $LFS/dev
+mount -vt devpts devpts $LFS/dev/pts -o gid=5,mode=620
+mount -vt proc proc $LFS/proc
+mount -vt sysfs sysfs $LFS/sys
+mount -vt tmpfs tmpfs $LFS/run
+
+if [ -h $LFS/dev/shm ]; then
+  mkdir -pv $LFS/$(readlink $LFS/dev/shm)
+fi
+
+chroot "$LFS" /usr/bin/env -i \
+HOME=/root \
+TERM="$TERM" \
+PS1='(nyx chroot) \u:\w\$ ' \
+PATH=/bin:/usr/bin:/sbin:/usr/sbin /bin/bash --login
+
+popd
+echo chroot exited
+
+echo "Unmounting virtual filesystem"
+umount -v $LFS/dev/pts
+umount -v $LFS/dev
+umount -v $LFS/run
+umount -v $LFS/proc
+umount -v $LFS/sys
+
+exit $?

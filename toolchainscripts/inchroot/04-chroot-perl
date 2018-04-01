@@ -1,0 +1,48 @@
+#!/bin/bash -e
+
+filename=$(echo $0 | rev | cut -d / -f1 | rev)
+
+TMP=${TMP:-/tmp/build}
+LOG=${LOG:-$(dirname $0)/log}
+SRC=${SRC:-$(dirname $0)/src}
+MAKEFLAGS=${MAKEFLAGS:-"-j2"}
+
+BUILD32="-m32"
+
+export MAKEFLAGS
+
+NAME=perl
+VERSION=5.26.1
+URL=http://www.cpan.org/src/5.0/$NAME-$VERSION.tar.xz
+
+wget -nc $URL -P $SRC
+
+[ "$1" = "fetch" ] && exit 0
+
+rm -fr $TMP
+mkdir -p $TMP $LOG $SRC
+
+tar xf $SRC/$NAME-$VERSION.tar.xz -C $TMP
+
+{ time \
+   {
+
+	cd $TMP/$NAME-$VERSION
+
+	sed -i 's@/usr/include@/tools/include@g' ext/Errno/Errno_pm.PL
+	
+	./configure.gnu \
+		--prefix=/tools \
+		-Dcc="gcc ${BUILD32}"
+	make
+	make install
+	ln -sfv /tools/bin/perl /usr/bin
+	
+	}
+} 2>&1 | tee $LOG/$filename.log
+    
+[ $PIPESTATUS = 0 ] || exit $PIPESTATUS
+
+rm -fr $TMP
+
+exit 0

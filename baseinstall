@@ -1,0 +1,137 @@
+#!/bin/bash -e
+
+. /etc/scratchpkg.conf
+
+PKG=(linux-api-headers
+man-pages
+bison
+glibc
+tzdata
+zlib
+file
+m4
+bc
+binutils
+gmp
+mpfr
+libmpc
+isl
+gcc
+multiarch_wrapper
+bzip2
+pkg-config
+ncurses
+readline
+attr
+acl
+libcap
+sed
+shadow
+psmisc
+iana-etc
+flex
+grep
+bash
+libtool
+gdbm
+gperf
+expat
+inetutils
+perl
+perl-xml-parser
+intltool
+autoconf
+automake
+xz
+kmod
+gettext
+elfutils
+procps-ng
+e2fsprogs
+coreutils
+diffutils
+gawk
+findutils
+groff
+grub
+less
+gzip
+iproute2
+kbd
+libpipeline
+make
+patch
+sysklogd
+sysvinit
+eudev
+util-linux
+man-db
+tar
+texinfo
+vim
+filesystem
+openssl
+ca-certificates-utils
+ca-certificates
+wget
+curl
+httpup)
+
+getportpath() {
+	
+	for repo in ${PORT_REPO[@]}; do
+		if [[ -f $repo/$1/spkgbuild ]]; then
+			PPATH=$(dirname "$repo/$1/spkgbuild")
+			return 0
+		fi
+	done
+	return 1
+	
+}
+
+# check existence of port
+for port in ${PKG[@]}; do
+	if ! getportpath $port; then
+		echo "Port '$port' not exist"
+		echo "CTRL + C to abort or ENTER to skip and continue"
+		read
+	fi
+done
+
+for i in ${PKG[@]}; do
+	if [[ -d "/var/lib/scratchpkg/index/$i" ]]; then
+		echo "*** $i is installed ***"
+	else
+		case $i in
+			glibc-32)
+				scratch -i -id -p $i || exit 1
+				echo "Adjusting toolchain"
+				gcc -dumpspecs | \
+perl -p -e 's@/tools/lib/ld@/lib/ld@g;' \
+	 -e 's@/tools/lib64/ld@/lib64/ld@g;' \
+	 -e 's@\*startfile_prefix_spec:\n@$_/usr/lib/ @g;' > \
+	 $(dirname $(gcc --print-libgcc-file-name))/specs
+				scratch -id -p bison -fr -r
+				;;
+			gcc|coreutils|grep|bash|file|filesystem)
+				scratch -i -id -ic -p $i || exit 1
+				;;
+			bc)
+				ln -sfv /tools/lib64/libncursesw.so.6 /usr/lib64/libncursesw.so.6
+				ln -sfv libncurses.so.6 /usr/lib64/libncurses.so
+				scratch -i -id -p $i || exit 1
+				rm /usr/lib64/{libncurses.so,libncursesw.so.6}
+				;;
+			perl)
+				echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
+				scratch -i -id -ic -p $i || exit 1
+				rm /etc/hosts
+				;;
+			*)
+				scratch -i -id -p $i || exit 1
+				;;
+		esac
+	fi
+done
+
+exit 0

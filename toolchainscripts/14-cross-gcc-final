@@ -1,0 +1,64 @@
+#!/bin/bash -e
+
+source $(dirname $0)/functions
+source $(dirname $0)/pkgversion
+
+filename=$(echo $0 | rev | cut -d / -f1 | rev)
+
+TMP=${TMP:-/tmp/build}
+LOG=${LOG:-$(dirname $0)/log}
+SRC=${SRC:-$(dirname $0)/src}
+
+NAME=gcc
+VERSION=${GCC_VER}
+
+fetch "http://patches.clfs.org/sysvinit/$NAME-7.1.0-specs-1.patch" $SRC
+fetch "ftp://gcc.gnu.org/pub/gcc/releases/$NAME-$VERSION/$NAME-$VERSION.tar.xz" $SRC
+
+[ "$1" = "fetch" ] && exit 0
+
+rm -fr $TMP
+mkdir -p $TMP $LOG $SRC
+
+tar xf $SRC/$tarballname -C $TMP
+cp $SRC/$NAME-7.1.0-specs-1.patch $TMP
+
+{ time \
+   {
+
+	cd $TMP/$NAME-$VERSION
+	
+	patch -Np1 -i ../gcc-7.1.0-specs-1.patch
+	
+	echo -en '\n#undef STANDARD_STARTFILE_PREFIX_1\n#define STANDARD_STARTFILE_PREFIX_1 "/tools/lib/"\n' >> gcc/config/linux.h
+	echo -en '\n#undef STANDARD_STARTFILE_PREFIX_2\n#define STANDARD_STARTFILE_PREFIX_2 ""\n' >> gcc/config/linux.h
+	
+	mkdir build
+	cd build
+	
+	AR=ar \
+	LDFLAGS="-Wl,-rpath,/cross-tools/lib" \
+	../configure \
+		--prefix=/cross-tools \
+		--build=${CLFS_HOST} \
+		--target=${CLFS_TARGET} \
+		--host=${CLFS_HOST} \
+		--with-sysroot=${CLFS} \
+		--with-local-prefix=/tools \
+		--with-native-system-header-dir=/tools/include \
+		--disable-static \
+		--enable-languages=c,c++ \
+		--with-mpc=/cross-tools \
+		--with-mpfr=/cross-tools \
+		--with-gmp=/cross-tools \
+		--with-isl=/cross-tools
+    make AS_FOR_TARGET="${CLFS_TARGET}-as" \
+		LD_FOR_TARGET="${CLFS_TARGET}-ld"
+	make install
+	
+	}
+} 2>&1 | tee $LOG/$filename.log
+    
+[ $PIPESTATUS = 0 ] && echo "$NAME-$VERSION" > /tools/$filename || exit $PIPESTATUS
+
+rm -fr $TMP

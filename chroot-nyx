@@ -1,0 +1,103 @@
+#!/bin/bash
+
+if [ "$UID" != "0" ]; then
+	echo "Chroot need root access!"
+	exit 1
+fi
+
+NYX=/mnt/clfs
+
+if [ ! -d $NYX ]; then
+	echo "Dir '$NYX' not exist"
+	exit 1
+fi
+
+### CREATE DIRECTORY
+
+mkdir -pv $NYX/{dev,proc,sys,run}
+
+mknod -m 600 $NYX/dev/console c 5 1 || true
+mknod -m 666 $NYX/dev/null c 1 3 || true
+
+install -dv -m 0750 $NYX/root
+install -dv -m 1777 $NYX/tmp $NYX/var/tmp
+
+mkdir -pv $NYX/bin
+mkdir -pv $NYX/usr/{bin,lib,lib64}
+ln -sv /tools/bin/{bash,cat,echo,grep,pwd,stty} $NYX/bin
+ln -sv /tools/bin/file $NYX/usr/bin
+ln -sv /tools/lib/libgcc_s.so{,.1} $NYX/usr/lib
+ln -sv /tools/lib/libstdc++.{a,so{,.6}} $NYX/usr/lib
+ln -sv /tools/lib64/libgcc_s.so{,.1} $NYX/usr/lib64
+ln -sv /tools/lib64/libstdc++.{a,so{,.6}} $NYX/usr/lib64
+ln -sv bash $NYX/bin/sh
+
+mkdir -pv $NYX/etc
+ln -sv /proc/self/mounts $NYX/etc/mtab
+echo "nameserver 8.8.8.8" > $NYX/etc/resolv.conf
+
+cat > $NYX/etc/passwd << "EOF"
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/dev/null:/bin/false
+daemon:x:6:6:Daemon User:/dev/null:/bin/false
+messagebus:x:18:18:D-Bus Message Daemon User:/var/run/dbus:/bin/false
+nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
+EOF
+
+cat > $NYX/etc/group << "EOF"
+root:x:0:
+bin:x:1:daemon
+sys:x:2:
+kmem:x:3:
+tape:x:4:
+tty:x:5:
+daemon:x:6:
+floppy:x:7:
+disk:x:8:
+lp:x:9:
+dialout:x:10:
+audio:x:11:
+video:x:12:
+utmp:x:13:
+usb:x:14:
+cdrom:x:15:
+adm:x:16:
+messagebus:x:18:
+systemd-journal:x:23:
+input:x:24:
+mail:x:34:
+nogroup:x:99:
+users:x:999:
+EOF
+
+### CHROOT PART
+pushd $NYX
+
+mount -v --bind /dev $NYX/dev
+mount -vt devpts devpts $NYX/dev/pts -o gid=5,mode=620
+mount -vt proc proc $NYX/proc
+mount -vt sysfs sysfs $NYX/sys
+mount -vt tmpfs tmpfs $NYX/run
+
+if [ -h $NYX/dev/shm ]; then
+  mkdir -pv $NYX/$(readlink $NYX/dev/shm)
+fi
+
+chroot "$NYX" /tools/bin/env -i \
+HOME=/root \
+TERM="$TERM" \
+PS1='(nyx chroot) \u:\w\$ ' \
+PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
+/tools/bin/bash --login +h
+
+popd
+echo chroot exited
+
+echo "Unmounting virtual filesystem"
+umount -v $NYX/dev/pts
+umount -v $NYX/dev
+umount -v $NYX/run
+umount -v $NYX/proc
+umount -v $NYX/sys
+
+exit $?

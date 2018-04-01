@@ -1,0 +1,59 @@
+#!/bin/bash -e
+
+source $(dirname $0)/functions
+source $(dirname $0)/functions-extra
+source $(dirname $0)/pkgversion
+
+filename=$(echo $0 | rev | cut -d / -f1 | rev)
+
+TMP=${TMP:-/tmp/build}
+LOG=${LOG:-$(dirname $0)/log}
+SRC=${SRC:-$(dirname $0)/src}
+
+NAME=bash
+VERSION=${BASH_VER}
+
+fetch "http://ftp.gnu.org/gnu/bash/$NAME-$VERSION.tar.gz" $SRC
+
+[ "$1" = "fetch" ] && exit 0
+
+rm -fr $TMP
+mkdir -p $TMP $LOG $SRC
+
+tar xf $SRC/$tarballname -C $TMP
+
+{ time \
+   {
+
+	cd $TMP/$NAME-$VERSION
+	
+	cat > config.cache << "EOF"
+ac_cv_func_mmap_fixed_mapped=yes
+ac_cv_func_strcoll_works=yes
+ac_cv_func_working_mktime=yes
+bash_cv_func_sigsetjmp=present
+bash_cv_getcwd_malloc=yes
+bash_cv_job_control_missing=present
+bash_cv_printf_a_format=yes
+bash_cv_sys_named_pipes=present
+bash_cv_ulimit_maxfds=yes
+bash_cv_under_sys_siglist=yes
+bash_cv_unusable_rtsigs=no
+gt_cv_int_divbyzero_sigfpe=yes
+EOF
+
+	./configure \
+		--prefix=/tools \
+		--build=${CLFS_HOST} \
+		--host=${CLFS_TARGET} \
+		--without-bash-malloc \
+		--cache-file=config.cache
+	make
+	make install
+	
+	}
+} 2>&1 | tee $LOG/$filename.log
+    
+[ $PIPESTATUS = 0 ] && echo "$NAME-$VERSION" > /tools/$filename || exit $PIPESTATUS
+
+rm -fr $TMP

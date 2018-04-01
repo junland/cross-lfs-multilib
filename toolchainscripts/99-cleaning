@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# tools
+strip --strip-debug /tools/lib/*
+strip --strip-debug /tools/lib64/*
+/usr/bin/strip --strip-unneeded /tools/{,s}bin/*
+rm -rf /tools/{,share}/{info,man,doc}
+find /tools/{lib,lib64,libexec} -name \*.la -delete
+
+# cross-tools
+strip --strip-debug /cross-tools/lib/*
+/usr/bin/strip --strip-unneeded /cross-tools/bin/*
+rm -rf /cross-tools/{,share}/{info,man,doc}
+find /cross-tools/{lib,libexec} -name \*.la -delete
