@@ -3,6 +3,7 @@ d:ruby-sass-listen
 d:google-chrome
 d:liberation-fonts
 d:dmenu
+d:ffmpegthumbnailer
 d:ruby-ffi
 d:virtualbox
 d:htop
@@ -11,6 +12,7 @@ d:papirus-icon-theme
 d:fakeroot
 d:terminus-font
 d:paper-icon-theme
+d:smplayer
 d:gtk-engine-murrine
 d:bdftopcf
 d:dwm-lfs
@@ -54,6 +56,8 @@ f:53b286e8bd76d9225f365673fafd6083:dmenu/dmenu-4.5-height-fixed.diff
 f:eeec3e11ff68f27ebbc3133ad6549f56:dmenu/dmenu-4.5-mouse-support.diff
 f:d940f98136b2092e4d00e24e5ae564c9:dmenu/.md5sum
 f:0c73d595eb78f159bea83f33bba15e80:dmenu/dmenu-4.5-xft.diff
+f:f9dc56bbbab40de7902cb7c21b5c92e4:ffmpegthumbnailer/spkgbuild
+f:37300b8aad679501cd2f7621ec415210:ffmpegthumbnailer/.md5sum
 f:a96ed1c5836cf8b8405bef8a7cc1d1b9:ruby-ffi/spkgbuild
 f:211d4a0dd829794b97d63ff7cc7fb20d:ruby-ffi/.md5sum
 f:7e2790e8c21dd5fc7af08d1e3a3f95d9:virtualbox/virtualbox.60-vboxdrv.rules
@@ -74,6 +78,8 @@ f:8bfef95797739401c4a6abcdecfd954b:terminus-font/terminus-font.install
 f:ec3a8df4c5d802c2e525c17959bdd050:terminus-font/.md5sum
 f:3a855b97d43f0bf1d6ca5e887a8a4cfa:paper-icon-theme/spkgbuild
 f:275328447afe0a7433ae11391d3e4dcd:paper-icon-theme/.md5sum
+f:80b2c862aa1c3614e350b59d7c8c242c:smplayer/spkgbuild
+f:2ba418ab09ce38178d02784e38c481e4:smplayer/.md5sum
 f:fd7c1a4b22b364d28291f830cec58e86:gtk-engine-murrine/spkgbuild
 f:8eecec33ff992f445673da76f4d40a16:gtk-engine-murrine/.md5sum
 f:15f50f2fb6b5ee71b25b5a2328144e99:bdftopcf/spkgbuild
