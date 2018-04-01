@@ -20,6 +20,7 @@ d:pango
 d:xz
 d:libvorbis
 d:lxdm
+d:libevent
 d:nasm
 d:pcre2
 d:libgudev
@@ -262,6 +263,7 @@ d:librsvg
 d:python2-gobject3
 d:gconf
 d:startup-notification
+d:transmission-gtk
 d:cairo
 f:7ec73e182bbe01405c259888f9abc402:nss/spkgbuild
 f:177177ee5c6289e06ce951b8cf75a689:nss/.md5sum
@@ -310,6 +312,8 @@ f:306987f6cc638527822203e05e990874:libvorbis/spkgbuild
 f:b46f8530ca10878ed5633196e51409ba:libvorbis/.md5sum
 f:004c03d05d0b9bc8e4ef496a63b62be5:lxdm/spkgbuild
 f:4cbe6345d62e2ab1f632108a23466bdd:lxdm/.md5sum
+f:db3c176ec6a862ddd08c43fb7f99cc84:libevent/spkgbuild
+f:38961f20b2b6da663620c6de188844d4:libevent/.md5sum
 f:6feb9d03f1c14fafd86e2572adc773c4:nasm/spkgbuild
 f:79c387f0758be4594426ec1aac7f6e87:nasm/.md5sum
 f:42ce7dc4e1f35eeeb5d4196200c38387:pcre2/spkgbuild
@@ -653,7 +657,7 @@ f:16e46981e9aca4b42fef8020b88a5a00:eudev/.md5sum
 f:746215758ebe4a99846d5ab2aed8d283:eudev/hwdb-update.hook
 f:d8b56cdb2c94709fcf95c1bcd83b1424:isl/spkgbuild
 f:aeb60a82df83251ea4c8a90b42ad4ff7:isl/.md5sum
-f:1f1ae9d8c7c8774be781513b3903151b:kbd/spkgbuild
+f:eec36a1fe2a96db7331175630a07552e:kbd/spkgbuild
 f:832987d59fd4d5aa496ea7ef95e34d86:kbd/.md5sum
 f:743aaafd8ab840f91f19a7e360839798:fribidi/spkgbuild
 f:a38fc0da9ae92fae01fd619b0adce4ee:fribidi/.md5sum
@@ -874,5 +878,7 @@ f:a5a6f8dfea0873ade0f8d0cd843f6d75:gconf/spkgbuild
 f:1c5ef3e624f0657ae91359d30358dd97:gconf/.md5sum
 f:af0450565522ad7723f7d448eedd2fe3:startup-notification/spkgbuild
 f:2cd9e1384d5340672acc1a0f08830849:startup-notification/.md5sum
+f:8d12319e4c158c2f7d3f856043d14590:transmission-gtk/spkgbuild
+f:8cd8e4e58a19b334b80460221a4799eb:transmission-gtk/.md5sum
 f:58580e7893fe2655bd48c3f7a6cd1cd9:cairo/spkgbuild
 f:40b4249ab7ecdcb2213f1463657f4239:cairo/.md5sum
