@@ -8,6 +8,7 @@ d:libcap
 d:httpup
 d:bash
 d:diffutils
+d:lua
 d:unzip
 d:wpa_supplicant-lfsbootscripts
 d:expat
@@ -28,6 +29,7 @@ d:procps-ng
 d:python2-mako
 d:ntfs-3g
 d:bzip2
+d:libcanberra
 d:gperf
 d:sdl
 d:lm_sensors
@@ -58,6 +60,7 @@ d:ncurses
 d:cmake
 d:intltool
 d:icon-naming-utils
+d:hexchat
 d:ffmpeg
 d:perl-xml-parser
 d:gpgme
@@ -79,6 +82,7 @@ d:libarchive
 d:js
 d:perl-uri
 d:which
+d:python2-cairo
 d:lxdm-lfsbootscripts
 d:lame
 d:libva
@@ -90,15 +94,19 @@ d:wpa_supplicant
 d:pinentry
 d:zip
 d:dbus-glib
+d:slang
+d:upower
 d:python2
 d:rust
 d:parted
 d:gtkmm2
 d:hicolor-icon-theme
+d:networkmanager
 d:openjpeg2
 d:glibmm
 d:libxkbcommon
 d:libtiff
+d:python3-cairo
 d:polkit-gnome
 d:python3
 d:poppler-data
@@ -119,6 +127,7 @@ d:wget
 d:ruby
 d:libusb
 d:binutils
+d:iptables
 d:sdl2
 d:python3-six
 d:pixman
@@ -134,6 +143,7 @@ d:icu
 d:libvpx
 d:alsa-utils-lfsbootscripts
 d:m4
+d:newt
 d:docbook-xml
 d:libsecret
 d:libxml2
@@ -186,6 +196,7 @@ d:pangomm
 d:dbus
 d:sqlite
 d:cairomm
+d:python3-gobject3
 d:iproute2
 d:gdbm
 d:gc
@@ -197,6 +208,7 @@ d:llvm
 d:ca-certificates-utils
 d:nspr
 d:gnome-icon-theme
+d:libndp
 d:rsync
 d:linux-api-headers
 d:cups
@@ -247,6 +259,7 @@ d:gstreamer
 d:polkit
 d:pcre
 d:librsvg
+d:python2-gobject3
 d:gconf
 d:startup-notification
 d:cairo
@@ -271,6 +284,8 @@ f:e3926c6e7f75ff00dbec4b07adc1576c:bash/spkgbuild
 f:9c2911a769f7905f9c121bb3fe5386f0:bash/.md5sum
 f:5450cae260f17330bf8975030890d6c1:diffutils/spkgbuild
 f:f6d2a3433c6bf7bc1a1c5ebd6a86da6c:diffutils/.md5sum
+f:eb93485c99b6245971a200e5f3e47369:lua/spkgbuild
+f:80d0b08196f5fc01ef417200687b8ed2:lua/.md5sum
 f:f5dfb44084786aa7ee8c097b84bd3e7c:unzip/spkgbuild
 f:17b9b7eedb58a660f70bfa415097e281:unzip/.md5sum
 f:3ab9a967250d39ed5cedb14b4d153d92:wpa_supplicant-lfsbootscripts/wpa_supplicant-lfsbootscripts.install
@@ -315,6 +330,8 @@ f:f3e0eb6014974090dd2593151485e75c:ntfs-3g/readme
 f:d98dc63dd132703c847d19d8cbd9d655:ntfs-3g/.md5sum
 f:0e7177ce8fb88c029d294699531394ab:bzip2/spkgbuild
 f:df7b9ee7ec8c76c692136b6b34becba0:bzip2/.md5sum
+f:58ca8244d5b92a514e87f2d1d4ebddbe:libcanberra/spkgbuild
+f:257b2b24f979e477a63c6ea9f63a4a74:libcanberra/.md5sum
 f:2f9cc4881ad76ab54d2bd25261601025:gperf/spkgbuild
 f:80ffa2fccf55e79effd0df37d399811f:gperf/.md5sum
 f:89298bf950cd4cc6049cb7bfa507a168:sdl/spkgbuild
@@ -384,6 +401,8 @@ f:b7c3b0055175e4408ffe00e9ecbadcf6:intltool/spkgbuild
 f:5a08e7da2dc50d829ed816f0f6e5b599:intltool/.md5sum
 f:6616e16b1ca4b9c9ed553d5cf83249f4:icon-naming-utils/spkgbuild
 f:05daf7ee7628e8b45a6921ea9a5efa0e:icon-naming-utils/.md5sum
+f:fc9f6643be12bf34d4934813f0486d23:hexchat/spkgbuild
+f:77db6cd69d3b5673725734d78b90f520:hexchat/.md5sum
 f:d64e934179b5618dd86e651b77ffbe5b:ffmpeg/spkgbuild
 f:d7ff3495bc8e0e2112c8d844e3d96382:ffmpeg/.md5sum
 f:db3078fe174415bdeee65216777b6eda:perl-xml-parser/spkgbuild
@@ -429,6 +448,8 @@ f:00d4484a3e5093fc0a81afcad6cb5071:perl-uri/spkgbuild
 f:7c62295e8532547c5507ccd9a5533a2b:perl-uri/.md5sum
 f:7a91662a7b195d9d89ae87d0e0af8cca:which/spkgbuild
 f:096279d9418ef86bf55fddcce8f1b960:which/.md5sum
+f:0b899ea83079ebd2e6a190a027746868:python2-cairo/spkgbuild
+f:285adf619f8cc9a87c4a05d614ca2296:python2-cairo/.md5sum
 f:efabf39571d5f7d2446a1a170710973a:lxdm-lfsbootscripts/spkgbuild
 f:f74ce9fb8ba178c68dbf26984b8ddb98:lxdm-lfsbootscripts/lxdm-lfsbootscripts.install
 f:cfaafb22571c66344b5147fc4991db6e:lxdm-lfsbootscripts/.md5sum
@@ -456,6 +477,10 @@ f:34b2fb364b8eea0f210992de621914ed:zip/spkgbuild
 f:64f53671e0c99500d0f183a66dcbc7b7:zip/.md5sum
 f:05103ad2f50ce6003f2467623524bf4d:dbus-glib/spkgbuild
 f:12c6d108387894af313a3e1bd3e7bc90:dbus-glib/.md5sum
+f:dfc699c52f4543ce302ba0c16a639d77:slang/spkgbuild
+f:68c04d22e193e55da445722a3cf992d9:slang/.md5sum
+f:ddacb1636026321b75bfacdc449807ae:upower/spkgbuild
+f:b5485153191c1d86b3484bc6360d858d:upower/.md5sum
 f:1cd9bb3781d94b193e97c9658a2e4d89:python2/spkgbuild
 f:09e82162e2cb9b5c79a23ceb7d1eb6b8:python2/python2-multilib.patch
 f:e66857177b5e6b02d274e4ac8595411f:python2/.md5sum
@@ -467,6 +492,8 @@ f:ab829bd2f5cf99f9a051fa6cff21b57e:gtkmm2/spkgbuild
 f:de163faf7eac6d7e14ab8ce6ffe1942a:gtkmm2/.md5sum
 f:b2a9bf9233f933115b1883a62ed6dc00:hicolor-icon-theme/spkgbuild
 f:24bb5c08c1354ed748db713d9ec18809:hicolor-icon-theme/.md5sum
+f:a1dd4fa464e1349bbb4cf159779f29c6:networkmanager/spkgbuild
+f:552e0d08502e851ec1b3ad106472abfa:networkmanager/.md5sum
 f:7d1636eee66ccc2d685044f4f6b3b677:openjpeg2/spkgbuild
 f:67a91445e48d92e1e339fbb18ced6c54:openjpeg2/.md5sum
 f:590583666fa363b322d703145613c834:glibmm/spkgbuild
@@ -475,6 +502,8 @@ f:02a4c7aa9472855f1b25ea263a17533c:libxkbcommon/spkgbuild
 f:1bc33fd595097d1519293e15fac4d164:libxkbcommon/.md5sum
 f:bde8a8ee332f8be6b5b545be3c58ddfc:libtiff/spkgbuild
 f:54d19a3d2f75cf08369dc6ed66c3654b:libtiff/.md5sum
+f:284332db1041e3b8b93b506f52c30098:python3-cairo/spkgbuild
+f:285adf619f8cc9a87c4a05d614ca2296:python3-cairo/.md5sum
 f:f25af57dee4dfbe71fc73ae872d7c8fd:polkit-gnome/spkgbuild
 f:292bb75f0c50d6569c293b7f5498596b:polkit-gnome/.md5sum
 f:fe674db367798b0626b0753a7996ab14:python3/spkgbuild
@@ -525,6 +554,9 @@ f:f0fb51a74f33c100012792481ac54fc0:libusb/readme
 f:7f55bdc58d71ab06483caf52286b67da:libusb/.md5sum
 f:b509d6ae0056f9258db09f95414bbe4b:binutils/spkgbuild
 f:b1b5ec3891be75580fbf6342e03bcb62:binutils/.md5sum
+f:a4174adafaff1d3253ba83f5f37c221c:iptables/spkgbuild
+f:58a0c4a1c18452a29e95ba5953c61ab1:iptables/readme
+f:678e0ce920ca3b3648dc17dd1deea79f:iptables/.md5sum
 f:e795b9844aa4783060c357279c385a61:sdl2/spkgbuild
 f:062a88e6af351b1d8634f96748fa80bb:sdl2/.md5sum
 f:e80d8d6e1735a827652f43c997d89bc1:python3-six/spkgbuild
@@ -555,6 +587,8 @@ f:9f964e810a782f042a7f4dfd3d602b4c:alsa-utils-lfsbootscripts/spkgbuild
 f:cfaafb22571c66344b5147fc4991db6e:alsa-utils-lfsbootscripts/.md5sum
 f:c2018ccf7b3f5594c73672fd5d842680:m4/spkgbuild
 f:4ff82c230b276260b72b072585d139e0:m4/.md5sum
+f:11478dc098a372f12582841d217ebb82:newt/spkgbuild
+f:375b26a0d4d082df39a442b50ebf893b:newt/.md5sum
 f:241a272356ea822cfefb80e8f3dab8c9:docbook-xml/spkgbuild
 f:59875186e57df4c6d76fcda1d194706e:docbook-xml/.md5sum
 f:1b5df1353785f4b2db76303dd0cfc35d:docbook-xml/docbook-xml.install
@@ -670,6 +704,8 @@ f:ad9f5caa741d37a40cca3c7f2a3f82aa:sqlite/spkgbuild
 f:baf2ac9eea1f1914c4650d64ccee223d:sqlite/.md5sum
 f:261b343db332dd01a7e229b259ef9b02:cairomm/spkgbuild
 f:e2b4bf5cb490c2d1d29f4233d37af4c0:cairomm/.md5sum
+f:bf05670bfe49bf0b6202ccdc7995bcb0:python3-gobject3/spkgbuild
+f:fdb397a3c4d96e25496723af31beade2:python3-gobject3/.md5sum
 f:bb5012682be0f91c183043c398e97db9:iproute2/spkgbuild
 f:1183cc65d1a1d8023edab7b109ef1d56:iproute2/.md5sum
 f:40f8e8f58e19111e6175dc1d1aa22043:gdbm/spkgbuild
@@ -693,6 +729,8 @@ f:ce2daa2f801f66f7e1f86d9c0f85c860:nspr/spkgbuild
 f:546a637cd6ffed70e49471ffe501ae63:nspr/.md5sum
 f:351d2ceb153d615d60716ad80644588d:gnome-icon-theme/spkgbuild
 f:9d47f147d768d5ab2ec220b260e641d0:gnome-icon-theme/.md5sum
+f:c12b27a7b1031f34245b46c876818bbc:libndp/spkgbuild
+f:5b3e888215475cdb2dfbccefe45f7628:libndp/.md5sum
 f:ae7498b1369f70bafaf07cfb3cf63335:rsync/spkgbuild
 f:2440491594636b1e6c50619d34b37a9f:rsync/rsync.install
 f:0177890e4a10d146620cbd6c5d0912d4:rsync/.md5sum
@@ -830,6 +868,8 @@ f:313a89536b9d4215c0d82cd1b78033dc:pcre/spkgbuild
 f:01191af884f9facf059bddbfa8ea474d:pcre/.md5sum
 f:eaac5b447130229119845dcc3f57ee08:librsvg/spkgbuild
 f:c5a70c7e33d2487d2cc82db6d9a8a8c6:librsvg/.md5sum
+f:055e581af6c21c3437ce00fac55d4a01:python2-gobject3/spkgbuild
+f:fdb397a3c4d96e25496723af31beade2:python2-gobject3/.md5sum
 f:a5a6f8dfea0873ade0f8d0cd843f6d75:gconf/spkgbuild
 f:1c5ef3e624f0657ae91359d30358dd97:gconf/.md5sum
 f:af0450565522ad7723f7d448eedd2fe3:startup-notification/spkgbuild
