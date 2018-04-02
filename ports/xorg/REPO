@@ -180,8 +180,8 @@ f:aa259de9dd0cf1e3b6c431056274e2ab:xmessage/spkgbuild
 f:27b38f9f1b632c9d3a1f872869ffc8c0:xmessage/.md5sum
 f:5378e9ecd5d0b261152d3ac5a59e963d:libxcursor/spkgbuild
 f:2c43a626f44071f96de96ecd592484a2:libxcursor/.md5sum
-f:baaf3ea0165c539cc633107dbddda105:libinput/spkgbuild
-f:179bdc1a2ca980e35246021b7d6d16f7:libinput/.md5sum
+f:9328801803094ddbb6fb16cb0f5c219c:libinput/spkgbuild
+f:617d7c1e87c58752456f737213e1fb99:libinput/.md5sum
 f:986cc4f1f472d19ed91750c57d0b0c53:xf86-input-synaptics/spkgbuild
 f:8e3e55061c94c08c868ea45ebe082444:xf86-input-synaptics/50-synaptics.conf
 f:b82d664f89609710cd80fc01cdbff359:xf86-input-synaptics/.md5sum

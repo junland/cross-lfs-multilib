@@ -3,7 +3,7 @@
 # maintainer	: emmett1, emmett1.2miligrams at gmail.com
 
 name=pcre
-version=8.41
+version=8.42
 release=1
 source=(ftp://ftp.csx.cam.ac.uk/pub/software/programming/$name/$name-$version.tar.bz2)
 
