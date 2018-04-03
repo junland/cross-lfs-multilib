@@ -15,5 +15,5 @@ build() {
 			--disable-nls \
 			--libdir=/usr/lib64
 	    make
-	    make prefix=$PKG/usr install
+	    make DESTDIR=$PKG install
 }
