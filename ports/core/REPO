@@ -10,6 +10,7 @@ d:httpup
 d:bash
 d:diffutils
 d:lua
+d:figlet
 d:unzip
 d:wpa_supplicant-lfsbootscripts
 d:expat
@@ -60,6 +61,7 @@ d:gst-plugins-base
 d:libmng
 d:gcc
 d:ncurses
+d:libical
 d:cmake
 d:intltool
 d:icon-naming-utils
@@ -173,6 +175,7 @@ d:cryptsetup
 d:xarchiver
 d:atkmm
 d:gnupg
+d:bluez
 d:readline
 d:jasper
 d:x265
@@ -194,7 +197,6 @@ d:sysklogd
 d:libxslt
 d:inetutils
 d:gtk3
-d:rc-init
 d:util-linux
 d:bc
 d:grep
@@ -308,6 +310,8 @@ f:5450cae260f17330bf8975030890d6c1:diffutils/spkgbuild
 f:f6d2a3433c6bf7bc1a1c5ebd6a86da6c:diffutils/.md5sum
 f:eb93485c99b6245971a200e5f3e47369:lua/spkgbuild
 f:80d0b08196f5fc01ef417200687b8ed2:lua/.md5sum
+f:a6b7d07956e6587d1e990fc542ab9586:figlet/spkgbuild
+f:dbc44d68171061cb79da6ffd5e5009bc:figlet/.md5sum
 f:f5dfb44084786aa7ee8c097b84bd3e7c:unzip/spkgbuild
 f:17b9b7eedb58a660f70bfa415097e281:unzip/.md5sum
 f:3ab9a967250d39ed5cedb14b4d153d92:wpa_supplicant-lfsbootscripts/wpa_supplicant-lfsbootscripts.install
@@ -423,6 +427,8 @@ f:58548105ca58454eae9bfe7a351a3e03:gcc/spkgbuild
 f:bb6f89e0c78ba6740cc9e94a8524835c:gcc/.md5sum
 f:a9135cb24df3b3769ce8b874019c5f54:ncurses/spkgbuild
 f:cb864cb78cc64bf13450190bfaafda15:ncurses/.md5sum
+f:4112ecd3c2bdbbb9a2461caceac6acde:libical/spkgbuild
+f:6b8847c9e34f0dc807aa9736ffcad61b:libical/.md5sum
 f:55dde4484c9b53ac3bd8a34cf25806e9:cmake/spkgbuild
 f:cc701ab988fe9bff7fb00809b8134b3b:cmake/.md5sum
 f:b7c3b0055175e4408ffe00e9ecbadcf6:intltool/spkgbuild
@@ -677,6 +683,10 @@ f:785f564172763fb8cfe8bd9858b6d61e:atkmm/spkgbuild
 f:19cfe18016f3883ae0aac07952ee34d2:atkmm/.md5sum
 f:3ea1cda47f304dd3e06a3db1b7869fcf:gnupg/spkgbuild
 f:fbbaa4edc233cfc651698c3718daf1a6:gnupg/.md5sum
+f:b0da36dc6eb48e054097b3ae7d28ec06:bluez/spkgbuild
+f:ed5071c4a89231f23cbb341f533ac1b6:bluez/bluez-obexd_without_systemd-1.patch
+f:3e25909a9413066e78f97f728ca4c36d:bluez/readme
+f:0c88355759df2a522bc81958baa1b5ae:bluez/.md5sum
 f:598da58b78af0b219bc7a58a6c77b99c:readline/spkgbuild
 f:29cba1eb0de7c346e3d6e593e9450aa6:readline/.md5sum
 f:8e336d86b593366e1cfdfe313324dd55:jasper/spkgbuild
@@ -725,8 +735,6 @@ f:63db5b87034739a5d6cec62651150b06:gtk3/spkgbuild
 f:a27041dd2c932c3fc7dbc79b7596316b:gtk3/gtk-query-immodules-3.0.hook
 f:225ba9de62a2f6cb2ac360c1ab30505a:gtk3/gtk3.install
 f:8e942b2f8c5e31169c56f9b12055fccf:gtk3/.md5sum
-f:55d1012f6024ec0ffdcbcaf13114becd:rc-init/spkgbuild
-f:fe52210b60a9538a016c7ece8afe8bc5:rc-init/.md5sum
 f:62fe97e72b83004d75bce3e32e59f49c:util-linux/spkgbuild
 f:f67c6d59f34698392165ebdbf02662d8:util-linux/.md5sum
 f:c8b11c8ddea1ba51201ff81c75ee336d:bc/spkgbuild
