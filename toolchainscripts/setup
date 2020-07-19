@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ "$UID" != "0" ]; then
+	echo "setup script needs root access to execute..."
+	exit 1
+fi
+
+echo "Setting up bootstrap..."
+
+mkdir -vp /mnt/lfs
+
+mkdir -vp /mnt/lfs/cross-tools
+
+mkdir -vp /mnt/lfs/tools
+
+ln -sv /mnt/lfs/tools /
+
+ln -sv /mnt/lfs/cross-tools /
+
+chown $USER:$USER -vR /mnt/lfs
